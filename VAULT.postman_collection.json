@@ -1,0 +1,1628 @@
+{
+	"info": {
+		"_postman_id": "2f17101c-283f-ba10-9bcb-c13d400e2e35",
+		"name": "VAULT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "LDAP",
+					"item": [
+						{
+							"name": "Read config",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{vault_url}}/auth/ldap/config",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"auth",
+										"ldap",
+										"config"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"password\": \"{{ldap_password}}\"\n}"
+								},
+								"url": {
+									"raw": "{{vault_url}}/auth/ldap/login/{{ldap_username}}",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"auth",
+										"ldap",
+										"login",
+										"{{ldap_username}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Github",
+					"item": [
+						{
+							"name": "Read config",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{vault_url}}/auth/github/map/teams",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"auth",
+										"github",
+										"map",
+										"teams"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"token\": \"{{github_token}}\"\n}"
+								},
+								"url": {
+									"raw": "{{vault_url}}/auth/github/login",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"auth",
+										"github",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Map team to policy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"token_ttl\": \"10m\",\n  \"token_max_ttl\": \"15m\",\n  \"policies\": \"default,admin\",\n  \"period\": 0,\n  \"bind_secret_id\": true\n}"
+								},
+								"url": {
+									"raw": "{{vault_url}}/auth/approle/role/:role_name",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"auth",
+										"approle",
+										"role",
+										":role_name"
+									],
+									"variable": [
+										{
+											"key": "role_name",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "ApppRole",
+					"item": [
+						{
+							"name": "Role ID",
+							"item": [
+								{
+									"name": "Read AppRole Role ID",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "X-Vault-Token",
+												"value": "{{vault_token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{vault_url}}/auth/approle/role/:role_name/role-id",
+											"host": [
+												"{{vault_url}}"
+											],
+											"path": [
+												"auth",
+												"approle",
+												"role",
+												":role_name",
+												"role-id"
+											],
+											"variable": [
+												{
+													"key": "role_name",
+													"value": ""
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update AppRole Role ID",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-Vault-Token",
+												"value": "{{vault_token}}"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"role_id\": \"custom-role-id\"\n}"
+										},
+										"url": {
+											"raw": "{{vault_url}}/auth/approle/role/:role_name/role-id",
+											"host": [
+												"{{vault_url}}"
+											],
+											"path": [
+												"auth",
+												"approle",
+												"role",
+												":role_name",
+												"role-id"
+											],
+											"variable": [
+												{
+													"key": "role_name",
+													"value": ""
+												}
+											]
+										},
+										"description": "Updates the RoleID of an existing AppRole to a custom value.\n\n### Parameters\n\n- `role_name` `(string: <required>)` - Name of the AppRole.\n- `role_id` `(string: <required>)` - Value to be set as RoleID."
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Secret ID",
+							"item": [
+								{
+									"name": "Generate New Secret ID",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-Vault-Token",
+												"value": "{{vault_token}}"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{vault_url}}/auth/approle/role/:role_name/secret-id",
+											"host": [
+												"{{vault_url}}"
+											],
+											"path": [
+												"auth",
+												"approle",
+												"role",
+												":role_name",
+												"secret-id"
+											],
+											"variable": [
+												{
+													"key": "role_name",
+													"value": ""
+												}
+											]
+										},
+										"description": "Generates and issues a new SecretID on an existing AppRole.\n\n### Parameters\n\n- `role_name` `(string: <required>)` - Name of the AppRole.\n- `metadata` `(map: {})` -  Metadata to be tied to the SecretID. This should be\n  a JSON-formatted string containing the metadata in key-value pairs. This \n  metadata will be set on tokens issued with this SecretID, and is logged in \n  audit logs _in plaintext_.\n- `cidr_list` `(string: \"\")` -  Comma separated list of CIDR blocks enforcing\n  secret IDs to be used from specific set of IP addresses. If 'bound_cidr_list' \n  is set on the role, then the list of CIDR blocks listed here should be a \n  subset of the CIDR blocks listed on the role.\n\n\n[Docu](https://www.vaultproject.io/api/auth/approle/index.html#create-new-approle)"
+									},
+									"response": []
+								},
+								{
+									"name": "Read Secret ID",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-Vault-Token",
+												"value": "{{vault_token}}"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"secret_id\": \"\"\n}"
+										},
+										"url": {
+											"raw": "{{vault_url}}/auth/approle/role/:role_name/secret-id/lookup",
+											"host": [
+												"{{vault_url}}"
+											],
+											"path": [
+												"auth",
+												"approle",
+												"role",
+												":role_name",
+												"secret-id",
+												"lookup"
+											],
+											"variable": [
+												{
+													"key": "role_name",
+													"value": ""
+												}
+											]
+										},
+										"description": "Reads out the properties of a SecretID.\n\n### Parameters\n\n- `role_name` `(string: <required>)` - Name of the AppRole.\n-  `secret_id` `(string: <required>)` - Secret ID attached to the role.\n\n[Docu](https://www.vaultproject.io/api/auth/approle/index.html#read-approle-secret-id)"
+									},
+									"response": []
+								},
+								{
+									"name": "Create Custom Secret ID",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "X-Vault-Token",
+												"value": "{{vault_token}}"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"metadata\": {\n    \"tag1\": \"production\"\n  }\n}"
+										},
+										"url": {
+											"raw": "{{vault_url}}/auth/approle/role/:role_name/custom-secret-id",
+											"host": [
+												"{{vault_url}}"
+											],
+											"path": [
+												"auth",
+												"approle",
+												"role",
+												":role_name",
+												"custom-secret-id"
+											],
+											"variable": [
+												{
+													"key": "role_name",
+													"value": ""
+												}
+											]
+										},
+										"description": "Assigns a \"custom\" SecretID against an existing AppRole. This is used in the\n\"Push\" model of operation.\n\n### Parameters\n\n- `role_name` `(string: <required>)` - Name of the AppRole. Part of the request URL.\n-  `secret_id` `(string: <required>)` - SecretID to be attached to the Role.\n- `metadata` `(map: {})` -  Metadata to be tied to the SecretID. This should be\n  a JSON-formatted string containing the metadata in key-value pairs. This \n  metadata will be set on tokens issued with this SecretID, and is logged in \n  audit logs _in plaintext_.\n- `cidr_list` `(string: \"\")` -  Comma separated list of CIDR blocks enforcing\n  secret IDs to be used from ppecific set of IP addresses. If 'bound_cidr_list' \n  is set on the role, then the list of CIDR blocks listed here should be a \n  subset of the CIDR blocks listed on the role.\n\n\n\n[Docu](https://www.vaultproject.io/api/auth/approle/index.html#create-custom-approle-secret-id)"
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Create/Update AppRole",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"token_ttl\": \"10m\",\n  \"token_max_ttl\": \"15m\",\n  \"policies\": \"default,admin\",\n  \"period\": 0,\n  \"bind_secret_id\": true\n}"
+								},
+								"url": {
+									"raw": "{{vault_url}}/auth/approle/role/:role_name",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"auth",
+										"approle",
+										"role",
+										":role_name"
+									],
+									"variable": [
+										{
+											"key": "role_name",
+											"value": ""
+										}
+									]
+								},
+								"description": "Creates a new AppRole or updates an existing AppRole.\n\n### Parameters\n\n- `role_name` `(string: <required>)` - Name of the AppRole.\n- `bind_secret_id` `(bool: true)` - Require `secret_id` to be presented when \n  logging in using this AppRole.\n- `bind_cidr_list` `(array: [])` - Comma-separated list of CIDR blocks; if set,\n  specifies blocks of IP addresses which can perform the login operation.\n- `policies` `(array: [])` - Comma-separated list of policies set on tokens \n  issued via this AppRole.\n- `secret_id_num_uses` `(integer: 0)` - Number of times any particular SecretID\n  can be used to fetch a token from this AppRole, after which the SecretID will \n  expire.  A value of zero will allow unlimited uses.\n- `secret_id_ttl` `(string: \"\")` - Duration in either an integer number of \n  seconds (`3600`) or an integer time unit (`60m`) after which any SecretID\n  expires.\n- `token_num_uses` `(integer: 0)` - Number of times issued tokens can be used.\n  A value of 0 means unlimited uses.\n- `token_ttl` `(string: \"\")` - Duration in either an integer number of seconds \n  (`3600`) or an integer time unit (`60m`) to set as the TTL for issued tokens \n  and at renewal time.\n- `token_max_ttl` `(string: \"\")` - Duration in either an integer number of \n  seconds (`3600`) or an integer time unit (`60m`) after which the issued token\n  can no longer be renewed.\n- `period` `(string: \"\")` - Duration in either an integer number of seconds \n  (`3600`) or an integer time unit (`60m`). If set, the token generated using \n  this AppRole is a _periodic_ token; so long as it is renewed it never expires,\n  but the TTL set on the token at each renewal is fixed to the value specified\n  here. If this value is modified, the token will pick up the new value at its\n  next renewal.\n\n[Docu](https://www.vaultproject.io/api/auth/approle/index.html#create-new-approle)"
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"role_id\": \"\",\n  \"secret_id\": \"\"\n}"
+								},
+								"url": {
+									"raw": "{{vault_url}}/auth/approle/login",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"auth",
+										"approle",
+										"login"
+									]
+								},
+								"description": "Issues a Vault token based on the presented credentials. `role_id` is always\nrequired; if `bind_secret_id` is enabled (the default) on the AppRole,\n`secret_id` is required too. Any other bound authentication values on the\nAppRole (such as client IP CIDR) are also evaluated.\n\n### Parameters\n\n- `role_id` `(string: <required>)` - RoleID of the AppRole.\n-  `secret_id` `(string: <required>)` - SecretID belonging to AppRole.\n\n[Docu](https://www.vaultproject.io/api/auth/approle/index.html#login-with-approle)"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete AppRole",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{vault_url}}/auth/approle/role/:role_name",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"auth",
+										"approle",
+										"role",
+										":role_name"
+									],
+									"variable": [
+										{
+											"key": "role_name",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Read AppRole",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{vault_url}}/auth/approle/role/:role_name",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"auth",
+										"approle",
+										"role",
+										":role_name"
+									],
+									"variable": [
+										{
+											"key": "role_name",
+											"value": ""
+										}
+									]
+								},
+								"description": "Reads the properties of an existing AppRole."
+							},
+							"response": []
+						},
+						{
+							"name": "List AppRoles",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{vault_url}}/auth/approle/role/?list=true",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"auth",
+										"approle",
+										"role",
+										""
+									],
+									"query": [
+										{
+											"key": "list",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Token",
+					"item": [
+						{
+							"name": "Create/Update Token Role",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"allowed_policies\": \"default,grantor-default,app1,app2\",\n  \"name\": \"nomad\",\n  \"orphan\": false,\n  \"renewable\": true\n}"
+								},
+								"url": {
+									"raw": "{{vault_url}}/auth/token/roles/:role_name",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"auth",
+										"token",
+										"roles",
+										":role_name"
+									],
+									"variable": [
+										{
+											"key": "role_name",
+											"value": ""
+										}
+									]
+								},
+								"description": "Creates (or replaces) the named role. Roles enforce specific behavior when \ncreating tokens that allow token functionality that is otherwise not\navailable or would require `sudo`/root privileges to access. Role\nparameters, when set, override any provided options to the `create`\nendpoints. The role name is also included in the token path, allowing all\ntokens created against a role to be revoked using the `sys/revoke-prefix`\nendpoint.\n\n### Parameters\n\n- `role_name` `(string: <required>)` – The name of the token role.\n- `allowed_policies` `(list: [])` – If set, tokens can be created with any \n  subset of the policies in this list, rather than the normal semantics of \n  tokens being a subset of the calling token's policies. The parameter is a \n  comma-delimited string of policy names. If at creation time \n  `no_default_policy` is not set and `\"default\"` is not contained in \n  `disallowed_policies`, the `\"default\"` policy will be added to the created \n  token automatically.\n- `disallowed_policies` `(list: [])` – If set, successful token creation via \n  this role will require that no policies in the given list are requested. The \n  parameter is a comma-delimited string of policy names. Adding `\"default\"` to \n  this list will prevent `\"default\"` from being added automatically to created\n  tokens.\n- `orphan` `(bool: true)` - If `true`, tokens created against this policy will \n  be orphan tokens (they will have no parent). As such, they will not be \n  automatically revoked by the revocation of any other token.\n- `period` `(string: \"\")` - If specified, the token will be periodic; it will have \n  no maximum TTL (unless an \"explicit-max-ttl\" is also set) but every renewal \n  will use the given period. Requires a root/sudo token to use.\n- `renewable` `(bool: true)` - Set to `false` to disable the ability of the token\n  to be renewed past its initial TTL.  Setting the value to `true` will allow\n  the token to be renewable up to the system/mount maximum TTL.\n- `explicit_max_ttl` `(string: \"\")` - If set, the token will have an explicit \n  max TTL set upon it. This maximum token TTL *cannot* be changed later, and \n  unlike with normal tokens, updates to the system/mount max TTL value will \n  have no effect at renewal time -- the token will never be able to be renewed \n  or used past the value set at issue time.\n- `path_suffix` `(string: \"\")` - If set, tokens created against this role will \n  have the given suffix as part of their path in addition to the role name. This\n  can be useful in certain scenarios, such as keeping the same role name in the \n  future but revoking all tokens created against it before some point in time. \n  The suffix can be changed, allowing new callers to have the new suffix as part\n  of their path, and then tokens with the old suffix can be revoked via \n  `sys/revoke-prefix`.\n\n\n[Docu](https://www.vaultproject.io/api/auth/token/index.html#create-update-token-role)"
+							},
+							"response": []
+						},
+						{
+							"name": "Read Token Role",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{vault_url}}/auth/token/roles/:role_name",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"auth",
+										"token",
+										"roles",
+										":role_name"
+									],
+									"variable": [
+										{
+											"key": "role_name",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lookup a Token",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"token\": \"f28a8417-db90-b1d4-d15e-a68ddad0c9a5\"\n}"
+								},
+								"url": {
+									"raw": "{{vault_url}}/auth/token/lookup",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"auth",
+										"token",
+										"lookup"
+									]
+								},
+								"description": "Returns information about the client token.\nRequires token to be set in Body."
+							},
+							"response": []
+						},
+						{
+							"name": "List Token Roles",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{vault_url}}/auth/token/roles?list=true",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"auth",
+										"token",
+										"roles"
+									],
+									"query": [
+										{
+											"key": "list",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Token",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{  \n   \"policies\":[  \n      \"default\",\n      \"grantor-default\",\n      \"app1\",\n      \"app2\"\n   ],\n   \"ttl\":\"72h\",\n   \"meta\":{  \n      \"configPath\":\"secret/secrets-bridge/Default\"\n   }\n}"
+								},
+								"url": {
+									"raw": "{{vault_url}}/auth/token/create/grantor-default",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"auth",
+										"token",
+										"create",
+										"grantor-default"
+									]
+								},
+								"description": "Creates a new token. Certain options are only available when called by a\nroot token. If used via the `/auth/token/create-orphan` endpoint, a root\ntoken is not required to create an orphan token (otherwise set with the\n`no_parent` option). If used with a role name in the path, the token will\nbe created against the specified role name; this may override options set\nduring this call.\n\n| Method   | Path                         | Produces               |\n| :------- | :--------------------------- | :--------------------- |\n| `POST`   | `/auth/token/create`         | `200 application/json` |\n| `POST`   | `/auth/token/create-orphan`  | `200 application/json` |\n| `POST`   | `/auth/token/create/:role_name`  | `200 application/json` |\n\n### Parameters\n\n- `id` `(string: \"\")` – The ID of the client token. Can only be specified by a \n  root token.  Otherwise, the token ID is a randomly generated UUID.\n- `role_name` `(string: \"\")` – The name of the token role.\n- `policies` `(array: \"\")` – A list of policies for the token. This must be a \n  subset of the policies belonging to the token making the request, unless root.\n  If not specified, defaults to all the policies of the calling token.\n- `meta` `(map: {})` – A map of string to string valued metadata. This is \n  passed through to the audit backends.\n- `no_parent` `(bool: false)` - If true and set by a root caller, the token will \n  not have the parent token of the caller. This creates a token with no parent.\n- `no_default_policy` `(bool: false)` - If true the `default` policy will not be \n  contained in this token's policy set.\n- `renewable` `(bool: true)` - Set to `false` to disable the ability of the token\n  to be renewed past its initial TTL.  Setting the value to `true` will allow\n  the token to be renewable up to the system/mount maximum TTL.\n- `lease` `(string: \"\")` - DEPRECATED; use `ttl` instead\n- `ttl` `(string: \"\")`  -The TTL period of the token, provided as \"1h\", where \n  hour is the largest suffix. If not provided, the token is valid for the\n  [default lease TTL](/docs/configuration/index.html), or indefinitely if the \n  root policy is used.\n- `explicit_max_ttl` `(string: \"\")` - If set, the token will have an explicit \n  max TTL set upon it. This maximum token TTL *cannot* be changed later, and \n  unlike with normal tokens, updates to the system/mount max TTL value will \n  have no effect at renewal time -- the token will never be able to be renewed \n  or used past the value set at issue time. \n- `display_name` `(string: \"token\")` - The display name of the token.\n- `num_uses` `(integer: 0)` - The maximum uses for the given token. This can be \n  used to create a one-time-token or limited use token. The value of 0 has no \n  limit to the number of uses.\n- `period` `(string: \"\")` - If specified, the token will be periodic; it will have \n  no maximum TTL (unless an \"explicit-max-ttl\" is also set) but every renewal \n  will use the given period. Requires a root/sudo token to use.\n\n\n\n[Docu](https://www.vaultproject.io/api/auth/token/index.html#create-token)"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "System",
+			"item": [
+				{
+					"name": "generate-root",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{vault_url}}/sys/generate-root/attempt",
+							"host": [
+								"{{vault_url}}"
+							],
+							"path": [
+								"sys",
+								"generate-root",
+								"attempt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{vault_url}}/sys/auth",
+							"host": [
+								"{{vault_url}}"
+							],
+							"path": [
+								"sys",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "audit",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{vault_url}}/sys/audit",
+							"host": [
+								"{{vault_url}}"
+							],
+							"path": [
+								"sys",
+								"audit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{vault_url}}/sys/health",
+							"host": [
+								"{{vault_url}}"
+							],
+							"path": [
+								"sys",
+								"health"
+							]
+						},
+						"description": "Returns the health status of Vault."
+					},
+					"response": []
+				},
+				{
+					"name": "mounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{vault_url}}/sys/mounts",
+							"host": [
+								"{{vault_url}}"
+							],
+							"path": [
+								"sys",
+								"mounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "capabilities",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"path\": \"*\",\n  \"token\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{vault_url}}/sys/capabilities",
+							"host": [
+								"{{vault_url}}"
+							],
+							"path": [
+								"sys",
+								"capabilities"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Policy",
+			"item": [
+				{
+					"name": "List Policies",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{vault_url}}/sys/policy",
+							"host": [
+								"{{vault_url}}"
+							],
+							"path": [
+								"sys",
+								"policy"
+							]
+						},
+						"description": "Lists all configured policies."
+					},
+					"response": []
+				},
+				{
+					"name": "Read Policy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{vault_url}}/sys/policy/:name",
+							"host": [
+								"{{vault_url}}"
+							],
+							"path": [
+								"sys",
+								"policy",
+								":name"
+							],
+							"variable": [
+								{
+									"key": "name",
+									"value": ""
+								}
+							]
+						},
+						"description": "Retrieve the rules for the named policy.\n\n### Parameters\n\n- `name` `(string: <required>)` – Specifies the name of the policy to retrieve.\n  This is specified as part of the request URL.\n\n[Docu](https://www.vaultproject.io/api/system/policy.html#read-policy)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create/Update Policy",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"rules\": \"path \\\"/sectret/path\\\" { capabilities = [\\\"sudo\\\",\\\"create\\\", \\\"read\\\", \\\"update\\\", \\\"delete\\\", \\\"list\\\"], allowed_parameters = { \\\"foo\\\" = [] }}\"\n}"
+						},
+						"url": {
+							"raw": "{{vault_url}}/sys/policy/:name",
+							"host": [
+								"{{vault_url}}"
+							],
+							"path": [
+								"sys",
+								"policy",
+								":name"
+							],
+							"variable": [
+								{
+									"key": "name",
+									"value": ""
+								}
+							]
+						},
+						"description": "Adds a new or updates an existing policy. Once a policy is\nupdated, it takes effect immediately to all associated users.\n\n### Parameters\n\n- `name` `(string: <required>)` – Specifies the name of the policy to create.\n  This is specified as part of the request URL.\n\n- `rules` `(string: <required>)` - Specifies the policy document. (See example in Body)\n  - `path` of the secret to apply the policy\n  - [`capabilities`](https://www.vaultproject.io/docs/concepts/policies.html#capabilities)\n  - [`allowed_parameters / denied_parameters`](https://www.vaultproject.io/docs/concepts/policies.html#allowed-and-denied-parameters)\n\n[Docu](https://www.vaultproject.io/api/system/policy.html#create-update-policy)\n\nShell formatter from HCL into JSON body: | gsed -e '/^[#;].*$/d;/^$/d; $a\"}' | gsed -e 's/\"/\\\\\"/g; :a;N;$!ba;s/\\n/ /g; s/path /\\\\npath /g; s/  */ /g; s/^/{ \"rules\": \"/ '"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Policy",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Vault-Token",
+								"value": "{{vault_token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{vault_url}}/sys/policy/:name",
+							"host": [
+								"{{vault_url}}"
+							],
+							"path": [
+								"sys",
+								"policy",
+								":name"
+							],
+							"variable": [
+								{
+									"key": "name",
+									"value": ""
+								}
+							]
+						},
+						"description": "Deletes the policy with the given name. This will immediately\naffect all users associated with this policy.\n\n### Parameters\n\n- `name` `(string: <required>)` – Specifies the name of the policy to delete.\n  This is specified as part of the request URL.\n\n[Docu](https://www.vaultproject.io/api/system/policy.html#delete-policy)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Secret",
+			"item": [
+				{
+					"name": "Generic",
+					"item": [
+						{
+							"name": "Create/Update Secret",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"foo\": \"bar\",\n  \"zip\": \"zap\"\n}"
+								},
+								"url": {
+									"raw": "{{vault_url}}/secret/:path",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"secret",
+										":path"
+									],
+									"variable": [
+										{
+											"key": "path",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Read Secret",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{vault_url}}/secret/:path",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"secret",
+										":path"
+									],
+									"variable": [
+										{
+											"key": "path",
+											"value": ""
+										}
+									]
+								},
+								"description": "https://www.vaultproject.io/api/secret/generic/index.html#read-secret"
+							},
+							"response": []
+						},
+						{
+							"name": "List Secrets",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{vault_url}}/secret/:path/?list=true",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"secret",
+										":path",
+										""
+									],
+									"query": [
+										{
+											"key": "list",
+											"value": "true"
+										}
+									],
+									"variable": [
+										{
+											"key": "path",
+											"value": ""
+										}
+									]
+								},
+								"description": "https://www.vaultproject.io/api/secret/generic/index.html#read-secret"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Secret",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{vault_url}}/secret/:path",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"secret",
+										":path"
+									],
+									"variable": [
+										{
+											"key": "path",
+											"value": ""
+										}
+									]
+								},
+								"description": "https://www.vaultproject.io/api/secret/generic/index.html#read-secret"
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Cubbyhole",
+					"item": [
+						{
+							"name": "List Secrets copy",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{vault_url}}/cubbyhole?list=true",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"cubbyhole"
+									],
+									"query": [
+										{
+											"key": "list",
+											"value": "true"
+										}
+									],
+									"variable": [
+										{
+											"key": "path",
+											"value": ""
+										}
+									]
+								},
+								"description": "https://www.vaultproject.io/api/secret/generic/index.html#read-secret"
+							},
+							"response": []
+						},
+						{
+							"name": "Read Secret",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{vault_url}}/cubbyhole/:path",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"cubbyhole",
+										":path"
+									],
+									"variable": [
+										{
+											"key": "path",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create/Update Secret",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{  \n   \"permKey\":\"\"\n}"
+								},
+								"url": {
+									"raw": "{{vault_url}}/cubbyhole/:path",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"cubbyhole",
+										":path"
+									],
+									"variable": [
+										{
+											"key": "path",
+											"value": ""
+										}
+									]
+								},
+								"description": "### Parameters\n\n- `path` `(string: <required>)` – Specifies the path of the secrets to\n  create/update. This is specified as part of the URL.\n\n- `:key` `(string: \"\")` – Specifies a key, paired with an associated value, to\n  be held at the given location. Multiple key/value pairs can be specified, and\n  all will be returned on a read operation. A key called `ttl` will trigger some\n  special behavior; see above for details."
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "AWS",
+					"item": [
+						{
+							"name": "Generate IAM Credentials",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{vault_url}}/aws/creds/:name",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"aws",
+										"creds",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Configure Root IAM Credentials",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"access_key\": \"AKIA...\",\n  \"secret_key\": \"2J+...\",\n  \"region\": \"us-east-1\"\n}"
+								},
+								"url": {
+									"raw": "{{vault_url}}/aws/config/root",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"aws",
+										"config",
+										"root"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Configure Lease",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"lease\": \"30m\",\n  \"lease_max\": \"12h\"\n}"
+								},
+								"url": {
+									"raw": "{{vault_url}}/aws/config/lease",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"aws",
+										"config",
+										"lease"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create/Update Role",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"policy\": \"{\\\"Version\\\":\\\"2012-10-17\\\",\\\"Statement\\\":[{\\\"Effect\\\":\\\"Allow\\\",\\\"Action\\\":[\\\"s3:ListBucket\\\"],\\\"Resource\\\":[\\\"arn:aws:s3:::testbucket\\\"]},{\\\"Effect\\\":\\\"Allow\\\",\\\"Action\\\":[\\\"s3:GetObject\\\"],\\\"Resource\\\":[\\\"arn:aws:s3:::testbucket\\/*\\\"]}]}\"\n}"
+								},
+								"url": {
+									"raw": "{{vault_url}}/aws/roles/:name",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"aws",
+										"roles",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Role",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"policy\": \"{\\\"Version\\\":\\\"2012-10-17\\\",\\\"Statement\\\":[{\\\"Effect\\\":\\\"Allow\\\",\\\"Action\\\":[\\\"s3:ListBucket\\\"],\\\"Resource\\\":[\\\"arn:aws:s3:::testbucket\\\"]},{\\\"Effect\\\":\\\"Allow\\\",\\\"Action\\\":[\\\"s3:GetObject\\\"],\\\"Resource\\\":[\\\"arn:aws:s3:::testbucket\\/*\\\"]}]}\"\n}"
+								},
+								"url": {
+									"raw": "{{vault_url}}/aws/roles/:name",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"aws",
+										"roles",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Read Lease",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{vault_url}}/aws/config/lease",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"aws",
+										"config",
+										"lease"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List Roles",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{vault_url}}/aws/roles?list=true",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"aws",
+										"roles"
+									],
+									"query": [
+										{
+											"key": "list",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Read Role",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Vault-Token",
+										"value": "{{vault_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{vault_url}}/aws/roles/:name",
+									"host": [
+										"{{vault_url}}"
+									],
+									"path": [
+										"aws",
+										"roles",
+										":name"
+									],
+									"variable": [
+										{
+											"key": "name",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	]
+}
