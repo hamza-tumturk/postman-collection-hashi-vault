@@ -1,7 +1,7 @@
 {  
   "info":{  
     "_postman_id":"2f17101c-283f-ba10-9bcb-c13d400e2e35",
-    "name":"VAULT",
+    "name":"Hashicorp Vault",
     "schema":"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item":[  
@@ -26,11 +26,12 @@
                   "raw":""
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/auth/ldap/config",
+                  "raw":"{{vault_url}}/v1/auth/ldap/config",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "auth",
                     "ldap",
                     "config"
@@ -56,11 +57,12 @@
                   "raw":"{\n  \"password\": \"{{ldap_password}}\"\n}"
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/auth/ldap/login/{{ldap_username}}",
+                  "raw":"{{vault_url}}/v1/auth/ldap/login/{{ldap_username}}",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "auth",
                     "ldap",
                     "login",
@@ -93,11 +95,12 @@
                   "raw":""
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/auth/github/map/teams",
+                  "raw":"{{vault_url}}/v1/auth/github/map/teams",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "auth",
                     "github",
                     "map",
@@ -124,11 +127,12 @@
                   "raw":"{\n  \"token\": \"{{github_token}}\"\n}"
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/auth/github/login",
+                  "raw":"{{vault_url}}/v1/auth/github/login",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "auth",
                     "github",
                     "login"
@@ -158,11 +162,12 @@
                   "raw":"{\n  \"token_ttl\": \"10m\",\n  \"token_max_ttl\": \"15m\",\n  \"policies\": \"default,admin\",\n  \"period\": 0,\n  \"bind_secret_id\": true\n}"
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/auth/approle/role/:role_name",
+                  "raw":"{{vault_url}}/v1/auth/approle/role/:role_name",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "auth",
                     "approle",
                     "role",
@@ -204,12 +209,13 @@
                       "raw":""
                     },
                     "url":{  
-                      "raw":"{{vault_url}}/auth/approle/role/:role_name/role-id",
+                      "raw":"{{vault_url}}/v1/auth/approle/role/:role_name/role-id",
                       "host":[  
                         "{{vault_url}}"
                       ],
                       "path":[  
-                        "auth",
+                        "v1",
+                    "auth",
                         "approle",
                         "role",
                         ":role_name",
@@ -246,12 +252,13 @@
                       "raw":"{\n  \"role_id\": \"custom-role-id\"\n}"
                     },
                     "url":{  
-                      "raw":"{{vault_url}}/auth/approle/role/:role_name/role-id",
+                      "raw":"{{vault_url}}/v1/auth/approle/role/:role_name/role-id",
                       "host":[  
                         "{{vault_url}}"
                       ],
                       "path":[  
-                        "auth",
+                        "v1",
+                    "auth",
                         "approle",
                         "role",
                         ":role_name",
@@ -295,12 +302,13 @@
                       "raw":""
                     },
                     "url":{  
-                      "raw":"{{vault_url}}/auth/approle/role/:role_name/secret-id",
+                      "raw":"{{vault_url}}/v1/auth/approle/role/:role_name/secret-id",
                       "host":[  
                         "{{vault_url}}"
                       ],
                       "path":[  
-                        "auth",
+                        "v1",
+                    "auth",
                         "approle",
                         "role",
                         ":role_name",
@@ -338,12 +346,13 @@
                       "raw":"{\n  \"secret_id\": \"\"\n}"
                     },
                     "url":{  
-                      "raw":"{{vault_url}}/auth/approle/role/:role_name/secret-id/lookup",
+                      "raw":"{{vault_url}}/v1/auth/approle/role/:role_name/secret-id/lookup",
                       "host":[  
                         "{{vault_url}}"
                       ],
                       "path":[  
-                        "auth",
+                        "v1",
+                    "auth",
                         "approle",
                         "role",
                         ":role_name",
@@ -382,12 +391,13 @@
                       "raw":"{\n  \"metadata\": {\n    \"tag1\": \"production\"\n  }\n}"
                     },
                     "url":{  
-                      "raw":"{{vault_url}}/auth/approle/role/:role_name/custom-secret-id",
+                      "raw":"{{vault_url}}/v1/auth/approle/role/:role_name/custom-secret-id",
                       "host":[  
                         "{{vault_url}}"
                       ],
                       "path":[  
-                        "auth",
+                        "v1",
+                    "auth",
                         "approle",
                         "role",
                         ":role_name",
@@ -428,11 +438,12 @@
                   "raw":"{\n  \"token_ttl\": \"10m\",\n  \"token_max_ttl\": \"15m\",\n  \"policies\": \"default,admin\",\n  \"period\": 0,\n  \"bind_secret_id\": true\n}"
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/auth/approle/role/:role_name",
+                  "raw":"{{vault_url}}/v1/auth/approle/role/:role_name",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "auth",
                     "approle",
                     "role",
@@ -466,11 +477,12 @@
                   "raw":"{\n  \"role_id\": \"\",\n  \"secret_id\": \"\"\n}"
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/auth/approle/login",
+                  "raw":"{{vault_url}}/v1/auth/approle/login",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "auth",
                     "approle",
                     "login"
@@ -496,11 +508,12 @@
 
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/auth/approle/role/:role_name",
+                  "raw":"{{vault_url}}/v1/auth/approle/role/:role_name",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "auth",
                     "approle",
                     "role",
@@ -533,11 +546,12 @@
                   "raw":""
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/auth/approle/role/:role_name",
+                  "raw":"{{vault_url}}/v1/auth/approle/role/:role_name",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "auth",
                     "approle",
                     "role",
@@ -571,11 +585,12 @@
                   "raw":""
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/auth/approle/role/?list=true",
+                  "raw":"{{vault_url}}/v1/auth/approle/role/?list=true",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "auth",
                     "approle",
                     "role",
@@ -618,11 +633,12 @@
                   "raw":"{\n  \"allowed_policies\": \"default,grantor-default,app1,app2\",\n  \"name\": \"nomad\",\n  \"orphan\": false,\n  \"renewable\": true\n}"
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/auth/token/roles/:role_name",
+                  "raw":"{{vault_url}}/v1/auth/token/roles/:role_name",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "auth",
                     "token",
                     "roles",
@@ -660,11 +676,12 @@
                   "raw":""
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/auth/token/roles/:role_name",
+                  "raw":"{{vault_url}}/v1/auth/token/roles/:role_name",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "auth",
                     "token",
                     "roles",
@@ -701,11 +718,12 @@
                   "raw":"{\n  \"token\": \"f28a8417-db90-b1d4-d15e-a68ddad0c9a5\"\n}"
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/auth/token/lookup",
+                  "raw":"{{vault_url}}/v1/auth/token/lookup",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "auth",
                     "token",
                     "lookup"
@@ -736,11 +754,12 @@
                   "raw":""
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/auth/token/roles?list=true",
+                  "raw":"{{vault_url}}/v1/auth/token/roles?list=true",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "auth",
                     "token",
                     "roles"
@@ -776,11 +795,12 @@
                   "raw":"{  \n   \"policies\":[  \n      \"default\",\n      \"grantor-default\",\n      \"app1\",\n      \"app2\"\n   ],\n   \"ttl\":\"72h\",\n   \"meta\":{  \n      \"configPath\":\"secret/secrets-bridge/Default\"\n   }\n}"
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/auth/token/create/grantor-default",
+                  "raw":"{{vault_url}}/v1/auth/token/create/grantor-default",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "auth",
                     "token",
                     "create",
@@ -816,12 +836,13 @@
               "raw":""
             },
             "url":{  
-              "raw":"{{vault_url}}/sys/generate-root/attempt",
+              "raw":"{{vault_url}}/v1/sys/generate-root/attempt",
               "host":[  
                 "{{vault_url}}"
               ],
               "path":[  
-                "sys",
+                "v1",
+                    "sys",
                 "generate-root",
                 "attempt"
               ]
@@ -850,12 +871,13 @@
               "raw":""
             },
             "url":{  
-              "raw":"{{vault_url}}/sys/auth",
+              "raw":"{{vault_url}}/v1/sys/auth",
               "host":[  
                 "{{vault_url}}"
               ],
               "path":[  
-                "sys",
+                "v1",
+                    "sys",
                 "auth"
               ]
             }
@@ -883,12 +905,13 @@
               "raw":""
             },
             "url":{  
-              "raw":"{{vault_url}}/sys/audit",
+              "raw":"{{vault_url}}/v1/sys/audit",
               "host":[  
                 "{{vault_url}}"
               ],
               "path":[  
-                "sys",
+                "v1",
+                    "sys",
                 "audit"
               ]
             }
@@ -909,12 +932,13 @@
               "raw":""
             },
             "url":{  
-              "raw":"{{vault_url}}/sys/health",
+              "raw":"{{vault_url}}/v1/sys/health",
               "host":[  
                 "{{vault_url}}"
               ],
               "path":[  
-                "sys",
+                "v1",
+                    "sys",
                 "health"
               ]
             },
@@ -943,12 +967,13 @@
               "raw":""
             },
             "url":{  
-              "raw":"{{vault_url}}/sys/mounts",
+              "raw":"{{vault_url}}/v1/sys/mounts",
               "host":[  
                 "{{vault_url}}"
               ],
               "path":[  
-                "sys",
+                "v1",
+                    "sys",
                 "mounts"
               ]
             }
@@ -976,12 +1001,13 @@
               "raw":"{\n  \"path\": \"*\",\n  \"token\": \"\"\n}"
             },
             "url":{  
-              "raw":"{{vault_url}}/sys/capabilities",
+              "raw":"{{vault_url}}/v1/sys/capabilities",
               "host":[  
                 "{{vault_url}}"
               ],
               "path":[  
-                "sys",
+                "v1",
+                    "sys",
                 "capabilities"
               ]
             }
@@ -1010,12 +1036,13 @@
               "raw":""
             },
             "url":{  
-              "raw":"{{vault_url}}/sys/policy",
+              "raw":"{{vault_url}}/v1/sys/policy",
               "host":[  
                 "{{vault_url}}"
               ],
               "path":[  
-                "sys",
+                "v1",
+                    "sys",
                 "policy"
               ]
             },
@@ -1040,12 +1067,13 @@
               "raw":""
             },
             "url":{  
-              "raw":"{{vault_url}}/sys/policy/:name",
+              "raw":"{{vault_url}}/v1/sys/policy/:name",
               "host":[  
                 "{{vault_url}}"
               ],
               "path":[  
-                "sys",
+                "v1",
+                    "sys",
                 "policy",
                 ":name"
               ],
@@ -1081,12 +1109,13 @@
               "raw":"{\n  \"rules\": \"path \\\"/sectret/path\\\" { capabilities = [\\\"sudo\\\",\\\"create\\\", \\\"read\\\", \\\"update\\\", \\\"delete\\\", \\\"list\\\"], allowed_parameters = { \\\"foo\\\" = [] }}\"\n}"
             },
             "url":{  
-              "raw":"{{vault_url}}/sys/policy/:name",
+              "raw":"{{vault_url}}/v1/sys/policy/:name",
               "host":[  
                 "{{vault_url}}"
               ],
               "path":[  
-                "sys",
+                "v1",
+                    "sys",
                 "policy",
                 ":name"
               ],
@@ -1117,12 +1146,13 @@
 
             },
             "url":{  
-              "raw":"{{vault_url}}/sys/policy/:name",
+              "raw":"{{vault_url}}/v1/sys/policy/:name",
               "host":[  
                 "{{vault_url}}"
               ],
               "path":[  
-                "sys",
+                "v1",
+                    "sys",
                 "policy",
                 ":name"
               ],
@@ -1166,11 +1196,12 @@
                   "raw":"{\n  \"foo\": \"bar\",\n  \"zip\": \"zap\"\n}"
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/secret/:path",
+                  "raw":"{{vault_url}}/v1/secret/:path",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "secret",
                     ":path"
                   ],
@@ -1201,11 +1232,12 @@
                   "raw":""
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/secret/:path",
+                  "raw":"{{vault_url}}/v1/secret/:path",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "secret",
                     ":path"
                   ],
@@ -1237,11 +1269,12 @@
                   "raw":""
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/secret/:path/?list=true",
+                  "raw":"{{vault_url}}/v1/secret/:path/?list=true",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "secret",
                     ":path",
                     ""
@@ -1279,11 +1312,12 @@
 
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/secret/:path",
+                  "raw":"{{vault_url}}/v1/secret/:path",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "secret",
                     ":path"
                   ],
@@ -1321,11 +1355,12 @@
                   "raw":""
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/cubbyhole?list=true",
+                  "raw":"{{vault_url}}/v1/cubbyhole?list=true",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "cubbyhole"
                   ],
                   "query":[  
@@ -1362,11 +1397,12 @@
                   "raw":""
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/cubbyhole/:path",
+                  "raw":"{{vault_url}}/v1/cubbyhole/:path",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "cubbyhole",
                     ":path"
                   ],
@@ -1401,11 +1437,12 @@
                   "raw":"{  \n   \"permKey\":\"\"\n}"
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/cubbyhole/:path",
+                  "raw":"{{vault_url}}/v1/cubbyhole/:path",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "cubbyhole",
                     ":path"
                   ],
@@ -1443,11 +1480,12 @@
                   "raw":""
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/aws/creds/:name",
+                  "raw":"{{vault_url}}/v1/aws/creds/:name",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "aws",
                     "creds",
                     ":name"
@@ -1483,11 +1521,12 @@
                   "raw":"{\n  \"access_key\": \"AKIA...\",\n  \"secret_key\": \"2J+...\",\n  \"region\": \"us-east-1\"\n}"
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/aws/config/root",
+                  "raw":"{{vault_url}}/v1/aws/config/root",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "aws",
                     "config",
                     "root"
@@ -1517,11 +1556,12 @@
                   "raw":"{\n  \"lease\": \"30m\",\n  \"lease_max\": \"12h\"\n}"
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/aws/config/lease",
+                  "raw":"{{vault_url}}/v1/aws/config/lease",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "aws",
                     "config",
                     "lease"
@@ -1551,11 +1591,12 @@
                   "raw":"{\n  \"policy\": \"{\\\"Version\\\":\\\"2012-10-17\\\",\\\"Statement\\\":[{\\\"Effect\\\":\\\"Allow\\\",\\\"Action\\\":[\\\"s3:ListBucket\\\"],\\\"Resource\\\":[\\\"arn:aws:s3:::testbucket\\\"]},{\\\"Effect\\\":\\\"Allow\\\",\\\"Action\\\":[\\\"s3:GetObject\\\"],\\\"Resource\\\":[\\\"arn:aws:s3:::testbucket\\/*\\\"]}]}\"\n}"
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/aws/roles/:name",
+                  "raw":"{{vault_url}}/v1/aws/roles/:name",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "aws",
                     "roles",
                     ":name"
@@ -1591,11 +1632,12 @@
                   "raw":"{\n  \"policy\": \"{\\\"Version\\\":\\\"2012-10-17\\\",\\\"Statement\\\":[{\\\"Effect\\\":\\\"Allow\\\",\\\"Action\\\":[\\\"s3:ListBucket\\\"],\\\"Resource\\\":[\\\"arn:aws:s3:::testbucket\\\"]},{\\\"Effect\\\":\\\"Allow\\\",\\\"Action\\\":[\\\"s3:GetObject\\\"],\\\"Resource\\\":[\\\"arn:aws:s3:::testbucket\\/*\\\"]}]}\"\n}"
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/aws/roles/:name",
+                  "raw":"{{vault_url}}/v1/aws/roles/:name",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "aws",
                     "roles",
                     ":name"
@@ -1631,11 +1673,12 @@
                   "raw":""
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/aws/config/lease",
+                  "raw":"{{vault_url}}/v1/aws/config/lease",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "aws",
                     "config",
                     "lease"
@@ -1661,11 +1704,12 @@
                   "raw":""
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/aws/roles?list=true",
+                  "raw":"{{vault_url}}/v1/aws/roles?list=true",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "aws",
                     "roles"
                   ],
@@ -1696,11 +1740,12 @@
                   "raw":""
                 },
                 "url":{  
-                  "raw":"{{vault_url}}/aws/roles/:name",
+                  "raw":"{{vault_url}}/v1/aws/roles/:name",
                   "host":[  
                     "{{vault_url}}"
                   ],
                   "path":[  
+                    "v1",
                     "aws",
                     "roles",
                     ":name"
